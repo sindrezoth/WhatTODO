@@ -1,6 +1,6 @@
 import React from "react";
 import ToDoItem from "./ToDoItem";
-import NewToDo from "./newToDo";
+import NewToDo from "./NewToDo";
 import { nanoid } from "nanoid";
 
 function ToDoList({ initialList }) {

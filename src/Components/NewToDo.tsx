@@ -1,3 +1,6 @@
+import React from "react";
+import { nanoid } from "nanoid";
+
 function NewToDo({ addToDo }) {
   const [newTodo, setNewTodo] = React.useState({
     title: "",
@@ -7,7 +10,8 @@ function NewToDo({ addToDo }) {
   });
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div className="new-todo">
+      <p>New To Do</p>
       <input
         value={newTodo.title}
         placeholder="Title"
@@ -18,7 +22,7 @@ function NewToDo({ addToDo }) {
           })
         }
       ></input>
-      <input
+      <textarea
         value={newTodo.description}
         placeholder="Description"
         onChange={(e) =>
@@ -27,18 +31,7 @@ function NewToDo({ addToDo }) {
             description: e.target.value,
           })
         }
-      ></input>
-      <input
-        value={newTodo.completed.toString()}
-        placeholder="Completed"
-        type="checkbox"
-        onChange={(e) =>
-          setNewTodo({
-            ...newTodo,
-            completed: Boolean(e.target.value),
-          })
-        }
-      ></input>
+      ></textarea>
       <button
         onClick={(e) => {
           addToDo(newTodo);
@@ -55,3 +48,5 @@ function NewToDo({ addToDo }) {
     </div>
   );
 }
+
+export default NewToDo;
