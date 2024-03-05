@@ -5,12 +5,6 @@ import { nanoid } from "nanoid";
 
 function ToDoList({ initialList }) {
   const [list, setList] = React.useState(initialList || []);
-  const [newTodo, setNewTodo] = React.useState({
-    title: "",
-    description: "",
-    completed: false,
-    id: nanoid(),
-  });
 
   function addToDo(newTodo) {
     setList([...list, { ...newTodo }]);

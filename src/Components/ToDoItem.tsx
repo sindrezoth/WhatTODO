@@ -1,21 +1,12 @@
 import React from "react";
 
 function ToDoItem({ initialTodo, updateTodo, deleteTodo }) {
-  console.log(initialTodo.title);
-  const [todo, setTodo] = React.useState(
-    initialTodo || {
-      title: "",
-      description: "",
-      completed: false,
-    },
-  );
-
   const [isEditing, setIsEditing] = React.useState(false);
 
   return (
-    <div className="todo-item">
+    <>
       {isEditing ? (
-        <>
+        <div className="todo-item-editing">
           <input
             type="text"
             value={initialTodo.title}
@@ -30,24 +21,29 @@ function ToDoItem({ initialTodo, updateTodo, deleteTodo }) {
               updateTodo({ ...initialTodo, description: e.target.value })
             }
           ></input>
-          <button onClick={() => deleteTodo(todo)}>Delete</button>
-          <button onClick={() => setIsEditing(false)}>Save</button>
-        </>
+        </div>
       ) : (
-        <>
+        <div className="todo-item">
           <p>{initialTodo.title}</p>
-          <button onClick={() => setIsEditing(true)}>Edit</button>
-        </>
+          <input
+            className="complete-checkbox"
+            type="checkbox"
+            value={initialTodo.completed}
+            onChange={(e) =>
+              updateTodo({ ...initialTodo, completed: Boolean(e.target.value) })
+            }
+          ></input>
+        </div>
       )}
-      <input
-        type="checkbox"
-        value={initialTodo.completed}
-        onChange={(e) =>
-          updateTodo({ ...initialTodo, completed: Boolean(e.target.value) })
-        }
-      ></input>
-      <button onClick={() => deleteTodo(todo)}>Delete</button>
-    </div>
+      <div className="todo-item-buttons">
+        {isEditing ? (
+          <button onClick={() => setIsEditing(false)}>Save</button>
+        ) : (
+          <button onClick={() => setIsEditing(true)}>Edit</button>
+        )}
+        <button onClick={() => deleteTodo(initialTodo)}>Delete</button>
+      </div>
+    </>
   );
 }
 

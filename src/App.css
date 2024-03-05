@@ -42,6 +42,33 @@
   border-radius: 2px;
 }
 
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+}
+
+.todo-item .complete-checkbox {
+  margin-right: 5px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+checked {
+  color: green;
+}
+
+.todo-item-editing {
+  display: flex;
+  align-items: center;
+}
+
 .todo-item input {
   margin-right: 5px;
 }
