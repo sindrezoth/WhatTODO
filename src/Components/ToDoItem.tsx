@@ -1,7 +1,17 @@
-import React from "react";
+import { useState, useRef, useEffect } from "react";
 
-function ToDoItem({ initialTodo, updateTodo, deleteTodo }) {
-  const [isEditing, setIsEditing] = React.useState(false);
+function ToDoItem({ initialTodo: todo, updateTodo, deleteTodo }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const todoRef = useRef();
+
+  useEffect(() => {
+    todoRef.current.onHover = () => {
+      console.log(todo.id);
+    };
+  }, []);
+  useEffect(() => {
+    console.log(todoRef.current);
+  }, [todoRef]);
 
   return (
     <>
@@ -9,28 +19,28 @@ function ToDoItem({ initialTodo, updateTodo, deleteTodo }) {
         <div className="todo-item-editing">
           <input
             type="text"
-            value={initialTodo.title}
-            onChange={(e) =>
-              updateTodo({ ...initialTodo, title: e.target.value })
-            }
+            value={todo.title}
+            onChange={(e) => updateTodo({ ...todo, title: e.target.value })}
           ></input>
-          <input
-            type="text"
-            value={initialTodo.description}
+          <textarea
+            value={todo.description}
             onChange={(e) =>
-              updateTodo({ ...initialTodo, description: e.target.value })
+              updateTodo({ ...todo, description: e.target.value })
             }
-          ></input>
+          ></textarea>
         </div>
       ) : (
-        <div className="todo-item">
-          <p>{initialTodo.title}</p>
+        <div ref={todoRef} className="todo-item">
+          <div>
+            <p>{todo.title}</p>
+            <p>{todo.description}</p>
+          </div>
           <input
             className="complete-checkbox"
             type="checkbox"
-            value={initialTodo.completed}
+            value={todo.completed}
             onChange={(e) =>
-              updateTodo({ ...initialTodo, completed: Boolean(e.target.value) })
+              updateTodo({ ...todo, completed: Boolean(e.target.value) })
             }
           ></input>
         </div>
@@ -41,7 +51,7 @@ function ToDoItem({ initialTodo, updateTodo, deleteTodo }) {
         ) : (
           <button onClick={() => setIsEditing(true)}>Edit</button>
         )}
-        <button onClick={() => deleteTodo(initialTodo)}>Delete</button>
+        <button onClick={() => deleteTodo(todo)}>Delete</button>
       </div>
     </>
   );

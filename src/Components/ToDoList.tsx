@@ -8,7 +8,6 @@ function ToDoList({ initialList }) {
 
   function addToDo(newTodo) {
     setList([...list, { ...newTodo }]);
-    setNewTodo({ title: "", description: "", completed: false, id: nanoid() });
   }
 
   function updateTodo(todoupd) {

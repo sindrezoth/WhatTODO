@@ -34,13 +34,13 @@ function NewToDo({ addToDo }) {
       ></textarea>
       <button
         onClick={(e) => {
-          addToDo(newTodo);
           setNewTodo({
             title: "",
             description: "",
             completed: false,
             id: nanoid(),
           });
+          addToDo(newTodo);
         }}
       >
         Add
