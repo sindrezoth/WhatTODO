@@ -1,5 +1,6 @@
 import React from "react";
 import ToDoItem from "./ToDoItem";
+import NewToDo from "./newToDo";
 import { nanoid } from "nanoid";
 
 function ToDoList({ initialList }) {
@@ -11,7 +12,7 @@ function ToDoList({ initialList }) {
     id: nanoid(),
   });
 
-  function addToDo() {
+  function addToDo(newTodo) {
     setList([...list, { ...newTodo }]);
     setNewTodo({ title: "", description: "", completed: false, id: nanoid() });
   }
@@ -28,7 +29,7 @@ function ToDoList({ initialList }) {
 
   return (
     <div className="todo-list">
-      <p>TODO LIST</p>
+      <p className="list-title">TODO LIST</p>
       {list.length !== 0 ? (
         list.map((todo) => (
           <ToDoItem
@@ -41,40 +42,8 @@ function ToDoList({ initialList }) {
       ) : (
         <p>No todos yet</p>
       )}
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <input
-          value={newTodo.title}
-          placeholder="Title"
-          onChange={(e) =>
-            setNewTodo({
-              ...newTodo,
-              title: e.target.value,
-            })
-          }
-        ></input>
-        <input
-          value={newTodo.description}
-          placeholder="Description"
-          onChange={(e) =>
-            setNewTodo({
-              ...newTodo,
-              description: e.target.value,
-            })
-          }
-        ></input>
-        <input
-          value={newTodo.completed.toString()}
-          placeholder="Completed"
-          type="checkbox"
-          onChange={(e) =>
-            setNewTodo({
-              ...newTodo,
-              completed: Boolean(e.target.value),
-            })
-          }
-        ></input>
-        <button onClick={addToDo}>Add</button>
-      </div>
+
+      <NewToDo addToDo={addToDo} />
     </div>
   );
 }
