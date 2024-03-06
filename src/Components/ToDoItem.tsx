@@ -31,7 +31,7 @@ function ToDoItem({ initialTodo: todo, updateTodo, deleteTodo }) {
         </div>
       ) : (
         <div ref={todoRef} className="todo-item">
-          <div>
+          <div style={{ display: "table-caption" }}>
             <p>{todo.title}</p>
             <p>{todo.description}</p>
           </div>
