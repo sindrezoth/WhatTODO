@@ -3,11 +3,18 @@ import "./App.css";
 import ToDoList from "./Components/ToDoList.tsx";
 import { nanoid } from "nanoid";
 
+export type ToDo = {
+  title: string;
+  description: string;
+  completed: boolean;
+  id: string;
+};
+
 const initialList = [
   {
     title: "First todo",
     description: "this is todo 1",
-    completed: false,
+    completed: true,
     id: nanoid(),
   },
   {

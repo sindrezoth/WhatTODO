@@ -1,17 +1,16 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
+import { ToDo } from "../App";
 
-function ToDoItem({ initialTodo: todo, updateTodo, deleteTodo }) {
+function ToDoItem({
+  todo,
+  updateTodo,
+  deleteTodo,
+}: {
+  todo: ToDo;
+  updateTodo: (todo: ToDo) => void;
+  deleteTodo: (todo: ToDo) => void;
+}) {
   const [isEditing, setIsEditing] = useState(false);
-  const todoRef = useRef();
-
-  useEffect(() => {
-    todoRef.current.onHover = () => {
-      console.log(todo.id);
-    };
-  }, []);
-  useEffect(() => {
-    console.log(todoRef.current);
-  }, [todoRef]);
 
   return (
     <>
@@ -20,17 +19,19 @@ function ToDoItem({ initialTodo: todo, updateTodo, deleteTodo }) {
           <input
             type="text"
             value={todo.title}
+            placeholder="Title"
             onChange={(e) => updateTodo({ ...todo, title: e.target.value })}
           ></input>
           <textarea
             value={todo.description}
+            placeholder="Description"
             onChange={(e) =>
               updateTodo({ ...todo, description: e.target.value })
             }
           ></textarea>
         </div>
       ) : (
-        <div ref={todoRef} className="todo-item">
+        <div className="todo-item">
           <div style={{ display: "table-caption" }}>
             <p>{todo.title}</p>
             <p>{todo.description}</p>
@@ -38,9 +39,9 @@ function ToDoItem({ initialTodo: todo, updateTodo, deleteTodo }) {
           <input
             className="complete-checkbox"
             type="checkbox"
-            value={todo.completed}
+            defaultChecked={todo.completed}
             onChange={(e) =>
-              updateTodo({ ...todo, completed: Boolean(e.target.value) })
+              updateTodo({ ...todo, completed: e.target.checked })
             }
           ></input>
         </div>
